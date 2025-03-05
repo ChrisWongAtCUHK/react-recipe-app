@@ -1,38 +1,372 @@
-.App {
+@keyframes showScale {
+  from {
+    transform: rotate(50dg);
+  }
+
+  to {
+    transform: rotate(5dg);
+  }
+}
+
+@keyframes entrance {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes entranceTitle {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position-x: 0%;
+  }
+  50% {
+    background-position-x: 75%;
+  }
+  100% {
+    background-position-x: 100%;
+  }
+}
+
+.container {
+  position: relative;
+  animation: gradient 10s cubic-bezier(0.24, 1.47, 0.85, 0.11) alternate
+    infinite;
+  background: linear-gradient(45deg, #2caa52, #3598a5, #26aa8d, #a947e2);
+  background-size: 400% 400%;
+  margin-bottom: 24px;
+  padding: 4px 0 0 0;
+  min-height: 250px;
+  max-height: 500px;
+}
+.source {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.header-modal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.details_container {
+  position: absolute;
+  z-index: 99999;
+  top: 0;
+}
+.strInstructions_details {
+  margin: 16px 0;
+  padding: 8px;
+  max-height: 100%;
+  overflow-y: scroll;
+  background: #deebea;
+  border-radius: 16px;
+  color: #093128;
+}
+.details_container h4 {
+  font-size: 25px;
+  margin: 8px 0;
+  text-decoration: underline;
+}
+.details_title {
+  color: #ffffff;
+  font-size: 40px;
+  margin: 16px;
+}
+.details_src {
+  color: #ffffff;
+  font-size: 12px;
+  margin: 16px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.closeModal {
+  border: #ffffff 2px solid;
+  background: none;
+  width: 80px;
+  cursor: pointer;
+  color: #ffffff;
+  height: 48px;
+  font-weight: bolder;
+  transition: 0.5s;
+  z-index: 999;
+  margin: 18px;
+}
+.strInstructions {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-column-gap: 80px;
+  grid-row-gap: 30px;
+  place-items: center stretch;
+  margin: 0 auto;
+  line-height: 120%;
+  max-width: 80%;
+  max-height: 400px;
+  color: #ffffff;
+  padding: 4%;
+  border-radius: 8px;
+  background: #689f77;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.ingredients {
+  grid-row-start: 2;
+  grid-row-start: 3;
+}
+
+.downloadContainer {
+  grid-row-start: 2;
+  grid-row-start: 3;
+  grid-column-start: 2;
+}
+
+.strInstructions_details {
+  grid-column-start: 2;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+.strMealThumb {
+  max-width: 200px;
+  border-radius: 8px;
+}
+
+.ingredients {
+  padding: 8px;
+  max-height: 150px;
+  margin: 16px 0;
+  overflow-y: scroll;
+}
+
+.download {
+  border: #ffffff 2px solid;
+  background: none;
+  width: 100%;
+  cursor: pointer;
+  color: #ffffff;
+  height: 48px;
+  font-weight: bold;
+  transition: 0.5s;
+  z-index: 999;
+}
+
+.download:hover {
+  background: #ffffff;
+  color: #689f77;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputSearchMain {
+  position: absolute;
+  bottom: -40px;
+  left: 0;
+  right: 0;
+}
+
+.recipesContainer {
+  display: flex;
+  width: 80%;
+  min-height: calc(100vh - 200px);
+  margin: 48px auto;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.recipesContainer li {
+  margin: 2px;
+}
+
+.logo {
+  width: 250px;
+}
+
+.fav-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  padding: 8px;
+}
+
+.fav-title {
+  padding-top: 20px 0;
+}
+
+.fav-btn-clear {
+  margin-top: 8px;
+  border: #ffffff 2px solid;
+  background: none;
+  width: 100%;
+  cursor: pointer;
+  color: #ffffff;
+  height: 48px;
+  font-weight: bold;
+  transition: 0.5s;
+  z-index: 999;
+}
+
+h5 {
+  animation: entranceTitle 1s ease-out forwards;
+  color: #ffffff;
+  text-shadow: 1px 1px 2px black;
+  font-weight: bold;
+  font-size: 42px;
+  text-align: left;
+  max-width: 500px;
+  line-height: 50px;
+}
+
+@media (max-width: 800px) {
+  .strMealThumb {
+    display: none;
+  }
+  .details_title {
+    font-size: 16px;
+    padding: 0 8px;
+    white-space: nowrap;
+  }
+  .closeModal {
+    width: 30px;
+    height: 30px;
+  }
+  .fav-title {
+    padding-top: 50px;
+    font-size: 35px;
+    text-align: center;
+  }
+  h5 {
+    max-width: 70%;
+    font-size: 25px;
+  }
+
+  .logo {
+    width: 120px;
+  }
+
+  .inputSearchMain {
+    position: absolute;
+    bottom: -50px;
+    z-index: 2;
+    left: 0;
+    right: 0;
+  }
+  .container {
+    margin-bottom: 50px;
+  }
+  .strInstructions {
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+  }
+  .strInstructions_details {
+    max-height: 60px;
+    border-radius: 0px;
+  }
+}
+
+.modal {
+  position: relative;
+  z-index: 999999;
+  background-color: #000000a4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  animation: entrance 0.5s ease-in;
+  z-index: 9999;
+}
+
+.modalVisible {
+  display: none;
+}
+
+.closeButton {
+  position: absolute;
+  z-index: 99999;
+  border-radius: 30%;
+  font-size: 20px;
+  right: 300px;
+}
+
+@keyframes entrance {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.info {
+  animation: entrance 1s;
+  text-align: center;
+  background-color: white;
+  color: #689f77;
+  max-width: 50%;
+  font-weight: bold;
+  margin: 90px auto;
+  padding: 16px;
+  border-radius: 50px;
+  box-shadow: 3px 3px 3px;
+}
+
+.confirm {
+  display: flex;
+  top: 0;
+  margin: 8px;
+  right: 0;
+  justify-content: center;
+  flex-direction: column;
+  background: rgb(219, 219, 217);
+  border-radius: 5px;
+  padding: 8px;
+  position: fixed;
+  z-index: 999999;
+}
+
+.confirm > p {
+  margin: 4px 0;
+  font-weight: bold;
+}
+.confirm button {
+  cursor: pointer;
+  padding: 8px;
+  border: none;
+}
+
+.confirm button:hover {
+  filter: opacity(0.9);
+}
+
+.confirm button:nth-child(2) {
+  background: rgb(199, 147, 4);
   color: white;
+  font-weight: bold;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.confirm > button + button {
+  margin: 4px 0;
 }
