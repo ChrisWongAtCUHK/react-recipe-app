@@ -1,0 +1,93 @@
+.logo {
+  position: absolute;
+  width: 250px;
+  margin: auto;
+  right: 0;
+  top: -200px;
+  z-index: 1;
+}
+
+@keyframes fundoAnimation {
+  from {
+    opacity: 0;
+    transform: translatey(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translatey(0px);
+  }
+}
+
+@keyframes foodAnimation {
+  from {
+    transform: translatey(0px);
+  }
+  to {
+    transform: translatey(-20px);
+  }
+}
+
+@keyframes panAnimation {
+  from {
+    transform: translate3d(8px, 1px, 0);
+  }
+  to {
+    transform: translate3d(0px, 0, 0);
+  }
+}
+
+@keyframes fuamcaAnimation {
+  0% {
+    transform: translate3d(px, 0, 700px) skew(1deg, 1deg);
+    opacity: 0.1;
+  }
+
+  50% {
+    transform: translate3d(px, 0, 700px) skew(-1deg, -1deg);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: translate3d(5px, -25px, 0px);
+    opacity: 0;
+  }
+}
+
+@keyframes pessoaAnimation {
+  0% {
+    transform: translatey(8px);
+  }
+
+  100% {
+    transform: translatey(2px);
+  }
+}
+
+#fundo {
+  animation: fundoAnimation 1s ease-in-out;
+}
+
+#food {
+  animation: foodAnimation 1.5s ease-in-out alternate infinite;
+}
+
+#carrot {
+  animation: foodAnimation 1s ease-in-out alternate infinite;
+}
+
+#panela {
+  animation: panAnimation 1s ease-in-out alternate infinite;
+}
+#fumaca {
+  animation: fuamcaAnimation 3s ease-in-out infinite;
+}
+#pessoa {
+  animation: pessoaAnimation 0.5s ease-in-out alternate infinite;
+}
+
+@media (max-width: 800px) {
+  .logo {
+    width: 150px;
+    top: -140px;
+  }
+}
