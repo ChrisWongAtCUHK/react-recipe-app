@@ -4,8 +4,13 @@ import { useState } from 'react'
 import SvgAnimatedCooking from './SvgAnimatedCooking'
 import './InputSearch.css'
 
-function InputSearch() {
+function InputSearch(props) {
   const [focused, setFocused] = useState(false)
+  
+  function getSearchValues(e) {
+    props.getSearchValues(e.target.value)
+  }
+
   return (
     <div className={['search', 'inputSearchMain', focused ? 'focused' : ''].join(' ')}>
       <SvgAnimatedCooking />
@@ -18,6 +23,7 @@ function InputSearch() {
         placeholder='Search a meal'
         onFocus={() => setFocused(() => true)}
         onBlur={() => setFocused(() => false)}
+        onKeyUp={getSearchValues}
       />
     </div>
   )

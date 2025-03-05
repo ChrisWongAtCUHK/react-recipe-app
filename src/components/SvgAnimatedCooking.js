@@ -3,14 +3,14 @@ import './SvgAnimatedCooking.css'
 function SvgAnimatedCooking() {
   return (
     <svg
-      class='logo'
+      className='logo'
       width='435'
       height='275'
       viewBox='0 0 435 275'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
     >
-      <g id='logo 1' clip-path='url(#clip0)'>
+      <g id='logo 1' clipPath='url(#clip0)'>
         <g id='g12'>
           <g id='fundo'>
             <path
