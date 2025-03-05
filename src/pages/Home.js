@@ -18,8 +18,6 @@ function Home() {
     axios
       .get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`)
       .then((response) => {
-        console.log(search)
-        console.log(response.data)
         if (response.data.meals) {
           setMeals(() => response.data.meals)
           setInfo(() => '')
