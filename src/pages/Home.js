@@ -1,6 +1,8 @@
 function Home() {
   return (
-    <div>Home</div>
+    <main>
+      <h5>Search Recipes from Around the World</h5>
+    </main>
   )
 }
 

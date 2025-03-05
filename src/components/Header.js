@@ -14,13 +14,13 @@ function Header() {
           <li data-id='menuList' className='menuLink'>
             <Link to='/' className={location.pathname === '/' ? 'activeLink' : ''}>
               <FontAwesomeIcon icon={faHouse} />
-              Home
+              &nbsp;Home
             </Link>
           </li>
           <li data-id='menuList' className='menuLink'>
             <Link to='/favorites' className={location.pathname === '/favorites' ? 'activeLink' : ''}>
               <FontAwesomeIcon icon={faHeart} />
-              Favorites
+              &nbsp;Your Favorite Recipes
             </Link>
           </li>
         </ul>
