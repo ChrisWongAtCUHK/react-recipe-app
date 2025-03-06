@@ -6,6 +6,7 @@ import {
   selectRecipe,
   loadFavMeals,
   setFavMeals,
+  setNotificationsInfos,
 } from '../features/slices/recipeSlice'
 import './FoodCard.css'
 
@@ -29,6 +30,18 @@ function FoodCard({ meal }) {
   }, [isFav])
 
   function saveFavRecipe() {
+    dispatch(
+      setNotificationsInfos({
+        infos: {
+          meal: meal,
+          isFav: (() => {
+            const isFavorite = !!isFav()
+            return !isFavorite
+          })(),
+        },
+      })
+    )
+
     if (isFav()) {
       // set off favorite
       const isFavoriteYet = favMeals.filter((fav) => fav.idMeal !== meal.idMeal)
