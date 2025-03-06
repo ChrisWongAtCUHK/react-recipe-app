@@ -8,6 +8,7 @@ const initialState = {
   favMeals: [],
   modalVisible: false,
   details: null,
+  selectMeal: 'VVnZd8A84z4',
 }
 
 const recipeSlice = createSlice({
@@ -38,6 +39,10 @@ const recipeSlice = createSlice({
     setModalVisible: (state, actions) => {
       state.modalVisible = actions.payload.modalVisible
       return state
+    },
+    setSelectMeal: (state, actions) => {
+      state.selectMeal = actions.payload.selectMeal
+      return state
     }
   },
 })
@@ -50,5 +55,6 @@ export const {
   setFavMeals,
   setDetails,
   setModalVisible,
+  setSelectMeal,
 } = recipeSlice.actions
 export default recipeSlice.reducer

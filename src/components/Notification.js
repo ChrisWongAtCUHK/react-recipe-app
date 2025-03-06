@@ -43,7 +43,7 @@ function Notification() {
       <div>
         <u> {notificationsInfos.meal ? notificationsInfos.meal.strMeal : ''}</u>{' '}
         has been{' '}
-        {notificationsInfos.isFav ? 'added' : 'removed'} to favorites!
+        {notificationsInfos.isFav ? 'added to' : 'removed from'} favorites!
       </div>
     </div>
   )

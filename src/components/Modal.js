@@ -1,16 +1,17 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { selectRecipe, setModalVisible } from '../features/slices/recipeSlice'
+import {
+  selectRecipe,
+  setModalVisible,
+  setSelectMeal,
+} from '../features/slices/recipeSlice'
 
 function Modal() {
   const recipe = useSelector(selectRecipe)
   const dispatch = useDispatch()
 
-  function handleCloseModal(e) {
-    console.log(e)
-  }
-
   function closeModal() {
     dispatch(setModalVisible({ modalVisible: false }))
+    dispatch(setSelectMeal({ selectMeal: '' }))
   }
 
   function handleDownloadRecipe() {
@@ -61,6 +62,7 @@ function Modal() {
   return (
     <div
       className={['modal', recipe.modalVisible ? '' : 'modalVisible'].join(' ')}
+      onClick={closeModal}
     >
       {recipe.details ? (
         <div className='details_container'>
@@ -104,8 +106,27 @@ function Modal() {
               </button>
             </div>
           </div>
+          <p class='source'>
+            <a
+              href={recipe.details.strSource}
+              target='_blank'
+              rel='noopener noreferrer'
+              className='details_src'
+            >
+              Source
+            </a>
+          </p>
         </div>
-      ) : null}
+      ) : (
+        <iframe
+          id='ytplayer'
+          title={recipe.selectMeal}
+          type='text/html'
+          width='640'
+          height='360'
+          src={`https://www.youtube.com/embed/${recipe.selectMeal}`}
+        ></iframe>
+      )}
     </div>
   )
 }

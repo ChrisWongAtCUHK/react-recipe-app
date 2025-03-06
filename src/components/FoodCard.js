@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import { faHeart, faPlayCircle } from '@fortawesome/free-solid-svg-icons'
 import { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -9,6 +9,7 @@ import {
   setNotificationsInfos,
   setDetails,
   setModalVisible,
+  setSelectMeal,
 } from '../features/slices/recipeSlice'
 import './FoodCard.css'
 
@@ -73,6 +74,16 @@ function FoodCard({ meal }) {
     dispatch(setModalVisible({ modalVisible: true }))
   }
 
+  function playVideo() {
+    if(meal.strYoutube && meal.strYoutube.includes('watch')){
+      const selectMeal = meal.strYoutube
+        .split('watch')[1].replace('?v=', '')
+  
+      dispatch(setSelectMeal({ selectMeal }))
+      dispatch(setModalVisible({ modalVisible: true }))
+    }
+  }
+
   return (
     <div className='containerFood'>
       <div className='card-header'>
@@ -98,9 +109,9 @@ function FoodCard({ meal }) {
         <button className='details' onClick={showDetails}>
           See Details
         </button>
-        {/* <button className="playVideo" onClick="$emit('showModal', youtubeId)">
-        <font-awesome-icon icon="play-circle" />
-      </button> */}
+        <button className='playVideo' onClick={playVideo}>
+          <FontAwesomeIcon icon={faPlayCircle} />
+        </button>
       </div>
     </div>
   )
