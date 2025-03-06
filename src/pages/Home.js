@@ -15,7 +15,7 @@ function Home() {
       return
     }
 
-    dispatch(setIsLoading({ isLoading: true}))
+    dispatch(setIsLoading({ isLoading: true }))
 
     axios
       .get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`)
@@ -27,7 +27,7 @@ function Home() {
           setMeals(() => null)
           setInfo(() => 'Could not find recipe with this name 😔')
         }
-        dispatch(setIsLoading({ isLoading: false}))
+        dispatch(setIsLoading({ isLoading: false }))
       })
       .catch((err) => setInfo(() => err))
   }
@@ -37,6 +37,7 @@ function Home() {
         <h5>Search Recipes from Around the World</h5>
       </main>
       <InputSearch getSearchValues={getSearchValues} />
+      {info ? <div className='info'>{info}</div> : null}
       <ul className='recipesContainer'>
         {meals
           ? meals.map((meal) => (
