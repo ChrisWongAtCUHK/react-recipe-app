@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   selectRecipe,
@@ -14,19 +14,19 @@ function FoodCard({ meal }) {
   const dispatch = useDispatch()
   const [isFavorited, setIsFavorited] = useState()
 
+  const isFav = useCallback(() => {
+    return favMeals
+      ? favMeals.find((recipe) => recipe.idMeal === meal.idMeal)
+      : false
+  }, [favMeals, meal.idMeal])
+
   useEffect(() => {
     dispatch(loadFavMeals())
   }, [dispatch])
 
   useEffect(() => {
     setIsFavorited(() => isFav())
-  }, [favMeals])
-
-  function isFav() {
-    return favMeals
-      ? favMeals.find((recipe) => recipe.idMeal === meal.idMeal)
-      : false
-  }
+  }, [isFav])
 
   function saveFavRecipe() {
     if (isFav()) {
