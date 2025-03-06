@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   selectRecipe,
@@ -12,29 +12,34 @@ import './FoodCard.css'
 function FoodCard({ meal }) {
   const favMeals = useSelector(selectRecipe).favMeals
   const dispatch = useDispatch()
+  const [isFavorited, setIsFavorited] = useState()
 
   useEffect(() => {
     dispatch(loadFavMeals())
   }, [dispatch])
+
+  useEffect(() => {
+    setIsFavorited(() => isFav())
+  }, [favMeals])
+
+  function isFav() {
+    return favMeals
+      ? favMeals.find((recipe) => recipe.idMeal === meal.idMeal)
+      : false
+  }
 
   function saveFavRecipe() {
     if (isFav()) {
       // set off favorite
       const isFavoriteYet = favMeals.filter((fav) => fav.idMeal !== meal.idMeal)
       dispatch(setFavMeals({ favMeals: isFavoriteYet }))
-
+      setIsFavorited(() => isFav())
       return
     }
 
     const newFavRecipes = [{ ...meal }, ...favMeals]
     dispatch(setFavMeals({ favMeals: newFavRecipes }))
-  }
-
-  function isFav() {
-    console.log(favMeals)
-    return favMeals
-      ? favMeals.find((recipe) => recipe.idMeal === meal.idMeal)
-      : false
+    setIsFavorited(() => isFav())
   }
 
   return (
@@ -45,7 +50,10 @@ function FoodCard({ meal }) {
             ? `${meal.strMeal.substring(0, 20)} ...`
             : meal.strMeal}
         </h3>
-        <button className='favButton' onClick={saveFavRecipe}>
+        <button
+          className={isFavorited ? 'favButton red' : 'favButton'}
+          onClick={saveFavRecipe}
+        >
           <FontAwesomeIcon icon={faHeart} />
         </button>
       </div>
