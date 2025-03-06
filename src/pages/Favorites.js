@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   selectRecipe,
   loadFavMeals,
+  setFavMeals,
+  setNotificationsInfos,
 } from '../features/slices/recipeSlice'
 import FoodCard from '../components/FoodCard'
 import './Favorites.css'
@@ -17,7 +19,27 @@ function Favorites() {
   useEffect(() => {
     dispatch(loadFavMeals())
   }, [dispatch])
-  function handleConfirmation() {
+
+  function handleConfirmation(action) {
+    if (confirm && action === 'cancel') {
+      setConfirm(() => false)
+      return
+    }
+
+    if (confirm && action === 'confirm') {
+      dispatch(setFavMeals({ favMeals: [] }))
+      dispatch(
+        setNotificationsInfos({
+          infos: {
+            meal: { strMeal: 'All meals' },
+            isFav: false,
+          },
+        })
+      )
+      setConfirm(() => false)
+      return
+    }
+
     setConfirm(() => true)
   }
   return (
