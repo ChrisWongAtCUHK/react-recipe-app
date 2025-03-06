@@ -5,7 +5,9 @@ function Modal() {
   const recipe = useSelector(selectRecipe)
   const dispatch = useDispatch()
 
-  function handleCloseModal() {}
+  function handleCloseModal(e) {
+    console.log(e)
+  }
 
   function closeModal() {
     dispatch(setModalVisible({ modalVisible: false }))
@@ -59,7 +61,6 @@ function Modal() {
   return (
     <div
       className={['modal', recipe.modalVisible ? '' : 'modalVisible'].join(' ')}
-      onClick={handleCloseModal}
     >
       {recipe.details ? (
         <div className='details_container'>
