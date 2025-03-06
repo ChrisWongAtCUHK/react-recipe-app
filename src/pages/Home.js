@@ -1,19 +1,21 @@
 import { useState } from 'react'
-import InputSearch from '../components/InputSearch'
 import axios from 'axios'
+import { useDispatch } from 'react-redux'
+import { setIsLoading } from '../features/slices/recipeSlice'
+import InputSearch from '../components/InputSearch'
 import FoodCard from '../components/FoodCard'
 
 function Home() {
+  const dispatch = useDispatch()
   const [meals, setMeals] = useState(null)
   const [info, setInfo] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
 
   function getSearchValues(search) {
     if (search.length < 2) {
       return
     }
 
-    setIsLoading(() => true)
+    dispatch(setIsLoading({ isLoading: true}))
 
     axios
       .get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`)
@@ -25,7 +27,7 @@ function Home() {
           setMeals(() => null)
           setInfo(() => 'Could not find recipe with this name 😔')
         }
-        setIsLoading(() => false)
+        dispatch(setIsLoading({ isLoading: false}))
       })
       .catch((err) => setInfo(() => err))
   }
@@ -36,7 +38,6 @@ function Home() {
       </main>
       <InputSearch getSearchValues={getSearchValues} />
       <ul className='recipesContainer'>
-        {/* <Loader :visible="isLoading" /> */}
         {meals
           ? meals.map((meal) => (
               <li key={`${meal.idMeal}`}>
