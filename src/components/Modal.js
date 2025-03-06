@@ -6,10 +6,55 @@ function Modal() {
   const dispatch = useDispatch()
 
   function handleCloseModal() {}
+
   function closeModal() {
     dispatch(setModalVisible({ modalVisible: false }))
   }
-  function handleDownloadRecipe() {}
+
+  function handleDownloadRecipe() {
+    const {
+      strMeal,
+      ingredientList,
+      strYoutube,
+      strSource,
+      strMealThumb,
+      strInstructions,
+    } = recipe.details
+
+    const recipeDownload = `
+    ${strMeal}  
+    ____________________________________________________
+
+    ${ingredientList.map((i) => {
+      if (!i) return ''
+      return `- ${i.ingredientList} - ${i.strMeasureList}`
+    })}
+   
+   ____________________________________________________
+
+   ${strInstructions}
+
+   ____________________________________________________
+
+   picture : ${strMealThumb} 
+
+   Youtube recipe : ${strYoutube}
+
+   fonte  ${strSource}
+    `
+
+    try {
+      const blob = new Blob([recipeDownload], { type: 'text/csv' })
+      const elem = window.document.createElement('a')
+      elem.href = window.URL.createObjectURL(blob)
+      elem.download = `${strMeal}.txt`
+      document.body.appendChild(elem)
+      elem.click()
+      document.body.removeChild(elem)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   return (
     <div
