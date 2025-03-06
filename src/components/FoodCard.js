@@ -7,6 +7,8 @@ import {
   loadFavMeals,
   setFavMeals,
   setNotificationsInfos,
+  setDetails,
+  setModalVisible,
 } from '../features/slices/recipeSlice'
 import './FoodCard.css'
 
@@ -55,6 +57,22 @@ function FoodCard({ meal }) {
     setIsFavorited(() => isFav())
   }
 
+  function showDetails() {
+    const ingredientList = []
+
+    for (let iIn = 0; iIn <= 20; iIn++) {
+      if (meal[`strIngredient${iIn}`] && meal[`strMeasure${iIn}`]) {
+        ingredientList.push({
+          ingredientList: meal[`strIngredient${iIn}`],
+          strMeasureList: meal[`strMeasure${iIn}`],
+        })
+      }
+    }
+    const details = { ingredientList, ...meal }
+    dispatch(setDetails({ details: details }))
+    dispatch(setModalVisible({ modalVisible: true }))
+  }
+
   return (
     <div className='containerFood'>
       <div className='card-header'>
@@ -73,6 +91,16 @@ function FoodCard({ meal }) {
 
       <div className='imgContainer'>
         <img src={meal.strMealThumb} alt={meal.strMeal} loading='lazy' />
+      </div>
+
+      <div className='options'>
+        <p className='fullName'>{meal.strMeal}</p>
+        <button className='details' onClick={showDetails}>
+          See Details
+        </button>
+        {/* <button className="playVideo" onClick="$emit('showModal', youtubeId)">
+        <font-awesome-icon icon="play-circle" />
+      </button> */}
       </div>
     </div>
   )

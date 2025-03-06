@@ -6,6 +6,8 @@ const initialState = {
   isLoading: false,
   notificationsInfos: {},
   favMeals: [],
+  modalVisible: false,
+  details: null,
 }
 
 const recipeSlice = createSlice({
@@ -26,12 +28,27 @@ const recipeSlice = createSlice({
     },
     setFavMeals: (state, actions) => {
       state.favMeals = [...actions.payload.favMeals]
-      localStorage.setItem(RECIPES_APP, JSON.stringify(state.favMeals)) 
+      localStorage.setItem(RECIPES_APP, JSON.stringify(state.favMeals))
       return state
     },
+    setDetails: (state, actions) => {
+      state.details = {...actions.payload.details}
+      return state
+    },
+    setModalVisible: (state, actions) => {
+      state.modalVisible = actions.payload.modalVisible
+      return state
+    }
   },
 })
 
 export const selectRecipe = (state) => state.recipe
-export const { setIsLoading, setNotificationsInfos, loadFavMeals, setFavMeals } = recipeSlice.actions
+export const {
+  setIsLoading,
+  setNotificationsInfos,
+  loadFavMeals,
+  setFavMeals,
+  setDetails,
+  setModalVisible,
+} = recipeSlice.actions
 export default recipeSlice.reducer

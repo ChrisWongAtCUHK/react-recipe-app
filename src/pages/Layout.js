@@ -4,6 +4,7 @@ import { selectRecipe } from '../features/slices/recipeSlice'
 import Header from '../components/Header'
 import Loader from '../components/Loader'
 import Notification from '../components/Notification'
+import Modal from '../components/Modal'
 
 function Layout() {
   const recipe = useSelector(selectRecipe)
@@ -11,6 +12,7 @@ function Layout() {
   return (
     <>
     <Notification />
+    <Modal />
     <div className="container">
       <Header />
       <Outlet />
