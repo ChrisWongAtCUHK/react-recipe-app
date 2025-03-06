@@ -1,4 +1,4 @@
-@keyframes slidein {
+@keyframes slideIn {
   from {
     transform: rotatey(150deg);
     opacity: 0;
@@ -41,7 +41,7 @@
   cursor: pointer;
   position: relative;
   border: olive 2px double;
-  animation: slidein cubic-bezier(0.65, 0, 0.35, 1) 1s;
+  animation: slideIn cubic-bezier(0.65, 0, 0.35, 1) 1s;
 }
 .imgContainer {
   margin-bottom: -16px;
